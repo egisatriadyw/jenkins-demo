@@ -1,15 +1,17 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
+    stage('Build') {
+        steps {
+            echo 'Building Docker image...'
                 script {
-                    // Build the Docker image
                     sh 'sudo docker build -t jenkinsdemo:1.0.0 .'
+                    if (currentBuild.resultIsBetterOrEqualTo("FAILURE")) {
+                        error 'Build failed, stopping deployment'
                 }
             }
         }
+    }
 
         stage('Deploy') {
             steps {
