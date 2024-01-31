@@ -1,5 +1,5 @@
 # Use Node.js version 16 on Alpine Linux
-FROM alpine:3.18
+FROM node:16-alpine
 
 # Set working directory inside the container
 WORKDIR /app
